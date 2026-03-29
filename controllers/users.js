@@ -14,7 +14,11 @@ module.exports = {
             status: status,
             loginCount: loginCount
         })
-        await newUser.save({session});
+        if (session) {
+            await newUser.save({ session });
+        } else {
+            await newUser.save();
+        }
         return newUser;
     },
     QueryByUserNameAndPassword: async function (username, password) {
